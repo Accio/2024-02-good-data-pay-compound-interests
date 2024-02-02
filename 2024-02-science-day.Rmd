@@ -1,0 +1,93 @@
+---
+title: "Good data pay compound interests: for PMDA science day 2024"
+author: "Jitao David Zhang"
+date: '`r format(Sys.time(), "%d %B, %Y")`'
+output:
+  html_document:
+    df_print: paged
+    theme: spacelab
+    mathjax: default
+    code_folding: hide
+    toc: true
+    toc_depth: 3
+    number_sections: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+  pdf_document:
+    number_sections: yes
+    toc: yes
+    toc_depth: 3
+editor_options: 
+  chunk_output_type: inline
+params:
+  echo: yes
+  relative: FALSE
+---
+
+```{r setup, include=FALSE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = TRUE, 
+                      fig.height=6, fig.width=6)
+library(ribiosUtils)
+library(ribiosIO)
+library(ribiosPlot)
+library(openxlsx)
+library(tidyverse)
+library(ggplot2)
+library(shape)
+theme_set(theme_light(base_size=13))
+```
+
+# Background
+
+# Executive summary
+
+# Analysis
+
+```{r good-data-pay-compound-interests, fig.height=4, fig.width=5, fig.path="fig/", dev=c("svg", "pdf")}
+set.seed(1887)
+t <- 1:50
+x <- 1 + 0.01 * t
+xe <- 1.01^t
+time_interval <- 15
+time_period <- t %/% time_interval
+time_rand <- unlist(tapply(rnorm(length(t), sd=0.1), 
+                           time_period, sort, decreasing=FALSE))
+xer <- 1.015^((time_period + time_rand)*time_interval)
+{
+  compactPar(mgp=c(1,0,0), cex.lab=1.5)
+  plot(t, x, type="l", ylim=c(1, 2), 
+       axes=FALSE, xlab="Time", ylab="Value of data and insights", lwd=2)
+  lines(t, xe, type="l", col="#004495", lwd=2)
+  lines(t, xer, type="l", col="limegreen", lwd=2)
+  axis(side=1, labels = FALSE, tick = NA, 
+       xaxp = c(-5, 60, 1)) ## xaxp: extremes and # of compounds
+  axis(side=2, labels=NA, tick=NA, yaxp=c(0, 3, 1))
+  usr <- par("usr")
+  shape::Arrowhead(
+    x0 = usr[1:2], 
+    y0 = usr[4:3], 
+    angle = c(90, 0), 
+    arr.type="triangle",
+    xpd = TRUE)
+  legend("topleft",
+         legend=c("Linear", "Exponential", "Reality"),
+         col=c("black", "#004495", "limegreen"), lty=1, bty="n")
+}
+```
+
+## Data read in
+
+# Acknowledgment
+
+# Session information
+
+```{r bedaInfo}
+bedaInfo()
+```
+
+```{r sessionInfo}
+sessionInfo()
+```
+
+# Appendix
