@@ -61,7 +61,7 @@ xer <- 1.015^((time_period + time_rand)*time_interval)
   lines(t, xe, type="l", col="#004495", lwd=2)
   lines(t, xer, type="l", col="limegreen", lwd=2)
   axis(side=1, labels = FALSE, tick = NA, 
-       xaxp = c(-5, 60, 1)) ## xaxp: extremes and # of compounds
+       xaxp = c(-5, 60, 1)) ## xaxp: extremes and # of ticks
   axis(side=2, labels=NA, tick=NA, yaxp=c(0, 3, 1))
   usr <- par("usr")
   shape::Arrowhead(
